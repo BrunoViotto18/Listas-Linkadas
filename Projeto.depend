@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1638369356 source:c:\users\aluno.cch01labf012\desktop\projeto\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+
+1638369623 c:\users\aluno.cch01labf012\desktop\projeto\linkedlist.h
+
