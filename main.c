@@ -5,21 +5,16 @@
 
 int main()
 {
-    /*Node node1;
-    Node node2;
+    node* lista = listInit();
 
-    node1.data = malloc(sizeof(int));
-    node1.data = 3;
-    node1.next = &node2;
-    node2.data = malloc(sizeof(char));
-    node2.data = 'G';*/
+    append(lista, "A", alocaChar);
+    append(lista, "AB", alocaChar);
+    append(lista, "ABC", alocaChar);
+    append(lista, "ABCD", alocaChar);
+    append(lista, "ABCDE", alocaChar);
+    append(lista, "ABCDEF", alocaChar);
 
-    //printf("%c", node1.next->data);
-    Head head;
-    head = list_init(head);
-    append(head, 3, sizeof(int));
-    Node node = *head.next;
-    printf("%d", head.next->data);
+    printf("%s", getChar(lista, 6));
 
     return 0;
 }

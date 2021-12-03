@@ -1,48 +1,154 @@
 #ifndef LINKEDLIST_H_INCLUDED
 #define LINKEDLIST_H_INCLUDED
 
+#include <stdbool.h>
+
 typedef struct Node
 {
     void* data;
     struct Node* next;
-}Node;
+}node;
 
-typedef struct Head
+
+/* Aloca Functions */
+
+node* alocaInt(void* valor)
 {
-    struct Node* next;
-}Head;
-
-
-Head list_init(Head head)
-{
-    head.next = NULL;
-    return head;
+    node* new_node = malloc(sizeof(int)+8);
+    new_node->data = malloc(sizeof(int));
+    new_node->data = (int*)valor;
+    new_node->next = NULL;
+    return new_node;
 }
 
-void append(Head head, void* data, size_t data_size)
+node* alocaFloat(void* valor)
 {
-    Node* new_node;
-    new_node = malloc(sizeof(new_node));
-    new_node->data = malloc(data_size);
-    new_node->data = data;
+    node* new_node = malloc(sizeof(float)+8);
+    new_node->data = malloc(sizeof(float));
+    new_node->data = (float*)valor;
     new_node->next = NULL;
+    return new_node;
+}
 
-    if (head.next == NULL)
+node* alocaChar(void* valor)
+{
+    size_t tam = sizeof(valor);
+    while (tam % 4 != 0)
     {
-        head.next = &new_node;
+        tam += 1;
+    }
+
+    node* new_node = malloc(tam + 8);
+    new_node->data = malloc(sizeof(int));
+    new_node->data = (char*)valor;
+    new_node->next = NULL;
+    return new_node;
+}
+
+node* alocaBool(void* valor)
+{
+    node* new_node = malloc(sizeof(bool)+8);
+    new_node->data = malloc(sizeof(bool));
+    new_node->data = (bool*)valor;
+    new_node->next = NULL;
+    return new_node;
+}
+
+
+//Inicia a lista
+node* listInit()
+{
+    node* new_node = malloc(sizeof(node*));
+    new_node->next = NULL;
+    return new_node;
+}
+
+
+// Adiciona um elemento de qualquer tipo ao final da lista
+void append(node* lista, void* valor, node*(createNode)(void*))
+{
+    node* new_node = createNode(valor);
+
+    if (lista->next == NULL)
+    {
+        lista->next = new_node;
     }
     else
     {
-        Node node;
-        node = *head.next;
-
-        while (node.next != NULL)
+        node* temp = lista->next;
+        while (temp->next != NULL)
         {
-            node = *node.next;
+            temp = temp->next;
         }
-
-        node.next = &new_node;
+        temp->next = new_node;
     }
+}
+
+void pop(node* lista, int index)
+{
+
+}
+
+/* Get Functions */
+
+int getInt(node* lista, int index)
+{
+    node* temp = lista->next;
+    for(int i = 0; i < index; i++)
+    {
+        temp = temp->next;
+        if (temp == NULL)
+        {
+            printf("\nError: List index out of range!");
+            exit(1);
+        }
+    }
+    return temp->data;
+}
+
+float* getFloat(node* lista, int index)
+{
+    node* temp = lista->next;
+    for(int i = 0; i < index; i++)
+    {
+        temp = temp->next;
+        if (temp == NULL)
+        {
+            printf("\nError: List index out of range!");
+            exit(1);
+        }
+    }
+    return temp->data;
+}
+
+char* getChar(node* lista, int index)
+{
+    node* temp = lista->next;
+    for(int i = 0; i < index; i++)
+    {
+        temp = temp->next;
+        if (temp == NULL)
+        {
+            printf("\nError: List index out of range!");
+            exit(1);
+        }
+    }
+    return temp->data;
+}
+
+bool getBool(node* lista, int index)
+{
+    node* temp = lista->next;
+    for(int i = 0; i < index; i++)
+    {
+        temp = temp->next;
+        if (temp == NULL)
+        {
+            printf("\nError: List index out of range!");
+            exit(1);
+        }
+    }
+    return temp->data;
 }
 
 #endif // LINKEDLIST_H_INCLUDED
